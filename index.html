@@ -176,7 +176,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="萌新5月工作记录"><a href="#萌新5月工作记录" class="headerlink" title="萌新5月工作记录"></a><strong>萌新5月工作记录</strong></h1><p>嘻嘻嘻嘻嘻</p>
+        <h1 id="萌新5月工作记录"><a href="#萌新5月工作记录" class="headerlink" title="萌新5月工作记录"></a><strong>萌新5月工作记录</strong></h1><p>vue 插入视频原本的过程可以用vedio<br>  但vedio存在的问题是vedio的缩略图无法提供，暂停和播放有问题<br>  后用iframe src 做链接插入到html中 ,后测试谷歌效果不好<br>  后发现谷歌测试iframe 会遇到问题 不稳定 其实iframe 插入视频到html中是可行的</p>
+<p>vue 返回上一页<br>  采用两个钩子函数 在页面进入和离开的时候记录滚动条的位置<br>  显示测试自己的项目 无论如何都检测不到滚动条的位置 以为是dtd的问题 但后期发现是检测的div的高度不能设置overflow;hidden<br>  后移动到 众康科诺 发现即使监听到了也依然不会 在页面进入的时候 将记录到的滚动条位置 设置成功</p>
+<p>vue 分享<br>  vue分享两个问题 1.是签名返回错误2.是跨域问题<br>  正确调用微信分享的jsdk时会打印出ok 且微信开发者工具能够正确预览 会显示share 的config 和 方法</p>
+<p>js23个模板<br>  写的想死 条件判断太多，是替换也是拼接，目前找不出最优解</p>
+<p>map 定位<br>  1.是根据前一页的省市 来判断高德地图加载位置<br>  2.能够点击定位 将经纬度插入到数据库 定位标签可以拖动 拖动之后更改经纬度<br>  3.实现自己的定位 自己的设备定位格式腰转成高德地图的格式 自己的gps定位是 WGS84 高德是 GCJ-02 这里有个公共的方法 不转化的话测量位置不准<br>  5 因为高德的map 创建的时候测量的亮点之间距离的方法写在了一起 而js 执行的顺序是先执行map的创建一直走到测量距离 但是获取自己定位的方法是异步的 所以并不一定能在最开始的时候<br>  获取到自己的位置 进而根本得不到距离  所以应该把测量距离的方法分开写  不要放在最开始执行的方法里  等到点击定位的时候进行距离测量 这样不会弹出第一遍没有经纬度第二遍有<br>  等我点击签到的时候再调用就不至于报错。<br>  两点之间的距离也有方法</p>
+<p>vue 山茶花开专题页<br>  :href=”‘<a href="https://www.17xs.org/project/view_h5.do?projectId=&#39;+item.id&quot;" target="_blank" rel="noopener">https://www.17xs.org/project/view_h5.do?projectId=&#39;+item.id&quot;</a><br>  跳转链接带参<br>  :style=”‘width:’ + ((item.donatAmount/item.cryMoney)*100+10).toFixed(2) + ‘%’”<br>  四舍五入更改样式<br>  NaN%<br>  四舍五入算出进度</p>
+<p>vue 将html转化成img<br>  最开始的想法是做canvas截取，后发现这不同于上传头像思路，上传图像是canvas.drawimage 所以后期截取的时候有getImageData  然后putImageData<br>  但是这个h5页面最开始是html 也就是无法在canvas中插入image 所以getimagedata肯定是空白<br>  后用插件html2canvas.js 转化成img<br>  但有两个问题<br>  1.html2canvas转化的时候会在body 跟节点处追加元素 这个追加的元素就是在最开始的时候要转化成img的div，造成的问题就是第一秒闪现两个div 用户体验度不高<br>  所以一开始的时候将追加的div放在一个opcity:0的div里  这里不能display:none; 不然截图是空白的<br>  2.清晰度不够的问题<br>  清晰度不够和最开始的时候上传用户头像的问题是一样的<br>  解决问题的放大就是将canvas 的画布大小<em>2  style.width 和 width的关系是 2：1<br>  然后将cavans 以 倍数放大<br>  这里的画布</em>2 和倍数 由js算出 不同分辨率的手机倍数不同<br>  将canvas 的清晰度设置好之后 应该设置canvas的高度和宽度，canvas宽高度应该等同于 div的宽度和高度<br>  这一步做完之后 截图清晰了但是截图不完整这个时候我们回顾位置发现 canvas的位置原始的时候相当于在屏幕的左上角左上角的宽度和高度对比最中间的div位置<br>  那肯定只能截取一部分 所以截图不完整<br>  想让截图完整就要调整canvas的位置，让canvas的位置等同于div的位置 这时候截图完成了  canvas转化的img位置 盖住最开始的div 放到微信里 长按即可保存</p>
+<p>ios token 利用中间页做转发<br>  从 地址栏获取的参数是加密的<br>  加密的方式有两种<br>  decodeURI<br>  decodeURIComponent<br>  解密同样有两种 不能混着加密和解密 </p>
+<p>调用接口拼数据 v-if 循环数组 json类型的数组 json对象<br>  先循环要的字段 然后自己创建对象 对象里的item 的 key值就是要的字段名 ，val值就是字段值<br>  我要的字段应该拼在一个数组对象里 push就行</p>
+<p>vue 分页<br>js中有个关键字叫 list1=vm.listview.concat(res.donats.resultData);</p>
 
       
 
